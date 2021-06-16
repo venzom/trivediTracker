@@ -32,3 +32,20 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
+@auth.route('/sign-up', methods=['GET', 'POST'])
+def sign-up():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        first_name = request.form.get('firstName')
+        last_name = request.form.get('lastName')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+        secret_code = request.form.get('secretCode')
+        team = request.form.get('team')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Email already exists.', category='error')
+        elif len(email) < 4:
+            flash('Email must be greater than 3 characters.', category='error')
+        elif len(first_name) < 2
